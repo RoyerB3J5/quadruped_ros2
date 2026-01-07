@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<robot name="hyperdog">
+  <!-- ================= BASE ================= -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.2536 0.17 0.05425 "/>
+      </geometry>
+      <origin xyz="0 0 0.027125" rpy="0 0 0"/>
+      <material name="gray">
+        <color rgba="0.6 0.6 0.6 1"/>
+      </material>
+    </visual>
+  </link>
+
+  
+  <!-- ============ FRONT LEFT HIP ============ -->
+  <link name="front_left_hip">
+    <visual>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0.2 0.2 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_left_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="front_left_hip"/>
+    <origin xyz="0.0972 0.0678 0.0171" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ THIGH ============ -->
+  <link name="front_left_thigh">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.15"/>
+      </geometry>
+      <origin xyz="0 0 -0.075"/>
+      <material name="green">
+        <color rgba="0.2 0.8 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_left_thigh_joint" type="revolute">
+    <parent link="front_left_hip"/>
+    <child link="front_left_thigh"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.9199" upper="1.0472" effort="10" velocity="2"/>
+  </joint>
+
+
+  <!-- ============ SHANK ============ -->
+  <link name="front_left_shank">
+    <visual>
+      <geometry>
+        <box size="0.025 0.025 0.15"/>
+      </geometry>
+      <!-- centro del shank hacia abajo -->
+      <origin xyz="0 0 -0.075"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="front_left_knee_joint" type="revolute">
+    <parent link="front_left_thigh"/>
+    <child link="front_left_shank"/>
+    <!-- nace al final del thigh -->
+    <origin xyz="0 0 -0.15"/>
+    <axis xyz="0 1 0"/>  <!-- pitch -->
+    <limit lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ FRONT RIGHT HIP ============ -->
+  <link name="front_right_hip">
+    <visual>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0.2 0.2 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_right_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="front_right_hip"/>
+    <origin xyz="0.0972 -0.0678 0.0171" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ THIGH ============ -->
+  <link name="front_right_thigh">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.15"/>
+      </geometry>
+      <origin xyz="0 0 -0.075"/>
+      <material name="green">
+        <color rgba="0.2 0.8 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_right_thigh_joint" type="revolute">
+    <parent link="front_right_hip"/>
+    <child link="front_right_thigh"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.9199" upper="1.0472" effort="10" velocity="2"/>
+  </joint>
+
+
+  <!-- ============ SHANK ============ -->
+  <link name="front_right_shank">
+    <visual>
+      <geometry>
+        <box size="0.025 0.025 0.15"/>
+      </geometry>
+      <!-- centro del shank hacia abajo -->
+      <origin xyz="0 0 -0.075"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="front_right_knee_joint" type="revolute">
+    <parent link="front_right_thigh"/>
+    <child link="front_right_shank"/>
+    <!-- nace al final del thigh -->
+    <origin xyz="0 0 -0.15"/>
+    <axis xyz="0 1 0"/>  <!-- pitch -->
+    <limit lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ REAR LEFT HIP ============ -->
+  <link name="rear_left_hip">
+    <visual>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0.2 0.2 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_left_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="rear_left_hip"/>
+    <origin xyz="-0.0972 0.0678 0.0171" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ THIGH ============ -->
+  <link name="rear_left_thigh">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.15"/>
+      </geometry>
+      <origin xyz="0 0 -0.075"/>
+      <material name="green">
+        <color rgba="0.2 0.8 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_left_thigh_joint" type="revolute">
+    <parent link="rear_left_hip"/>
+    <child link="rear_left_thigh"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.9199" upper="1.0472" effort="10" velocity="2"/>
+  </joint>
+
+
+  <!-- ============ SHANK ============ -->
+  <link name="rear_left_shank">
+    <visual>
+      <geometry>
+        <box size="0.025 0.025 0.15"/>
+      </geometry>
+      <!-- centro del shank hacia abajo -->
+      <origin xyz="0 0 -0.075"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="rear_left_knee_joint" type="revolute">
+    <parent link="rear_left_thigh"/>
+    <child link="rear_left_shank"/>
+    <!-- nace al final del thigh -->
+    <origin xyz="0 0 -0.15"/>
+    <axis xyz="0 1 0"/>  <!-- pitch -->
+    <limit lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ REAR RIGHT HIP ============ -->
+  <link name="rear_right_hip">
+    <visual>
+      <geometry>
+        <box size="0.04 0.04 0.04"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0.2 0.2 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_right_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="rear_right_hip"/>
+    <origin xyz="-0.0972 -0.0678 0.0171" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- ============ THIGH ============ -->
+  <link name="rear_right_thigh">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.15"/>
+      </geometry>
+      <origin xyz="0 0 -0.075"/>
+      <material name="green">
+        <color rgba="0.2 0.8 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_right_thigh_joint" type="revolute">
+    <parent link="rear_right_hip"/>
+    <child link="rear_right_thigh"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.9199" upper="1.0472" effort="10" velocity="2"/>
+  </joint>
+
+
+  <!-- ============ SHANK ============ -->
+  <link name="rear_right_shank">
+    <visual>
+      <geometry>
+        <box size="0.025 0.025 0.15"/>
+      </geometry>
+      <!-- centro del shank hacia abajo -->
+      <origin xyz="0 0 -0.075"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="rear_right_knee_joint" type="revolute">
+    <parent link="rear_right_thigh"/>
+    <child link="rear_right_shank"/>
+    <!-- nace al final del thigh -->
+    <origin xyz="0 0 -0.15"/>
+    <axis xyz="0 1 0"/>  <!-- pitch -->
+    <limit lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+</robot>
+
+

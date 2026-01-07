@@ -1,0 +1,956 @@
+<?xml version="1.0"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="urd_robot_cuadrupedo_v5">
+  <!-- Added compatibility root frame for RViz/tools that expect `base_link` -->
+  <link name="base_link" />
+  <joint name="base_link_to_base_robot" type="fixed">
+    <parent link="base_link" />
+    <child link="base_robot" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <link
+    name="base_robot">
+    <inertial>
+      <origin
+        xyz="0.00028092 -1.8375E-06 0.024004"
+        rpy="0 0 0" />
+      <mass
+        value="0.62602" />
+      <inertia
+        ixx="0.0011232"
+        ixy="9.7755E-08"
+        ixz="6.3465E-08"
+        iyy="0.0011039"
+        iyz="-4.2277E-09"
+        izz="0.0021064" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/base_robot.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/base_robot.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="eslabon_coxa_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="0.035369 -0.0090269 0.001623"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7467E-05"
+        ixy="2.4535E-06"
+        ixz="-3.2608E-07"
+        iyy="1.4748E-05"
+        iyz="4.9519E-07"
+        izz="2.7861E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor1"
+    type="revolute">
+    <origin
+      xyz="0.0556 -0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_robot" />
+    <child
+      link="eslabon_coxa_derecha_delantera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_femur_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="-0.0024207 -0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="-1.9564E-07"
+        ixz="-3.536E-06"
+        iyy="4.8323E-05"
+        iyz="-2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor5"
+    type="revolute">
+    <origin
+      xyz="0.0467 -0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_derecha_delantera" />
+    <child
+      link="eslabon_femur_derecha_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.885" upper="1.0472" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_tibia_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="-0.00052387 -0.014256 -0.033591"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0939E-05"
+        ixy="3.5897E-09"
+        ixz="8.1426E-07"
+        iyy="1.094E-05"
+        iyz="1.3416E-08"
+        izz="7.9923E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor9"
+    type="revolute">
+    <origin
+      xyz="0 -0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_derecha_delantera" />
+    <child
+      link="eslabon_tibia_derecha_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+  <link
+    name="eslabon_coxa_derecha_trazera">
+    <inertial>
+      <origin
+        xyz="-0.032487 -0.0090269 0.0016241"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7467E-05"
+        ixy="2.4094E-06"
+        ixz="-3.4746E-07"
+        iyy="1.4778E-05"
+        iyz="5.0366E-07"
+        izz="2.7891E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trazera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trazera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor2"
+    type="revolute">
+    <origin
+      xyz="-0.0556 -0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_robot" />
+    <child
+      link="eslabon_coxa_derecha_trazera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_femur_derecha_trazera">
+    <inertial>
+      <origin
+        xyz="-0.0024207 -0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="-1.9564E-07"
+        ixz="-3.536E-06"
+        iyy="4.8323E-05"
+        iyz="-2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trazera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trazera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor6"
+    type="revolute">
+    <origin
+      xyz="-0.0267 -0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_derecha_trazera" />
+    <child
+      link="eslabon_femur_derecha_trazera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.885" upper="1.0472" effort="10" velocity="2"/>
+  </joint>
+  <link
+    name="eslabon_tibia_derecha_trazera">
+    <inertial>
+      <origin
+        xyz="-0.00052387 -0.014256 -0.033591"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0939E-05"
+        ixy="3.5897E-09"
+        ixz="8.1426E-07"
+        iyy="1.094E-05"
+        iyz="1.3416E-08"
+        izz="7.9923E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trazera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trazera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor10"
+    type="revolute">
+    <origin
+      xyz="0 -0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_derecha_trazera" />
+    <child
+      link="eslabon_tibia_derecha_trazera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_coxa_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="0.035374 0.0090266 0.001627"
+        rpy="0 0 0" />
+      <mass
+        value="0.075981" />
+      <inertia
+        ixx="1.746E-05"
+        ixy="-2.4484E-06"
+        ixz="-3.1785E-07"
+        iyy="1.4729E-05"
+        iyz="-5.0055E-07"
+        izz="2.7844E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor3"
+    type="revolute">
+    <origin
+      xyz="0.0556 0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_robot" />
+    <child
+      link="eslabon_coxa_izquierda_delantera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10" velocity="2"/>
+  </joint>
+  <link
+    name="eslabon_femur_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="-0.0024214 0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="1.9572E-07"
+        ixz="-3.5447E-06"
+        iyy="4.8323E-05"
+        iyz="2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor7"
+    type="revolute">
+    <origin
+      xyz="0.0467 0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_izquierda_delantera" />
+    <child
+      link="eslabon_femur_izquierda_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.885" upper="1.0472" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_tibia_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="-0.00052045 0.014256 -0.033592"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0943E-05"
+        ixy="-3.601E-09"
+        ixz="8.2159E-07"
+        iyy="1.094E-05"
+        iyz="-1.3419E-08"
+        izz="7.95E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor11"
+    type="revolute">
+    <origin
+      xyz="0 0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_izquierda_delantera" />
+    <child
+      link="eslabon_tibia_izquierda_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_coxa_izquierda_trasera">
+    <inertial>
+      <origin
+        xyz="-0.032487 0.0090269 0.0016228"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7466E-05"
+        ixy="-2.4094E-06"
+        ixz="-3.4767E-07"
+        iyy="1.4778E-05"
+        iyz="-4.9508E-07"
+        izz="2.7891E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor4"
+    type="revolute">
+    <origin
+      xyz="-0.0556 0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_robot" />
+    <child
+      link="eslabon_coxa_izquierda_trasera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_femur_izquierda_trazera">
+    <inertial>
+      <origin
+        xyz="-0.0024214 0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="1.9572E-07"
+        ixz="-3.5447E-06"
+        iyy="4.8323E-05"
+        iyz="2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trazera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trazera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor8"
+    type="revolute">
+    <origin
+      xyz="-0.0267 0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_izquierda_trasera" />
+    <child
+      link="eslabon_femur_izquierda_trazera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.885" upper="1.0472" effort="10" velocity="2" />
+  </joint>
+  <link
+    name="eslabon_tibia_izquierda_trasera">
+    <inertial>
+      <origin
+        xyz="-0.00052045 0.014256 -0.033592"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0943E-05"
+        ixy="-3.601E-09"
+        ixz="8.2159E-07"
+        iyy="1.094E-05"
+        iyz="-1.3419E-08"
+        izz="7.95E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_simulation/models/urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Motor12"
+    type="revolute">
+    <origin
+      xyz="0 0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_izquierda_trazera" />
+    <child
+      link="eslabon_tibia_izquierda_trasera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10" velocity="2"/>
+  </joint>
+  
+  <transmission name="Motor1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor1">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor2">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor3">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor4">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor4_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor5_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor5">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor5_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor6_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor6">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor6_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor7_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor7">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor7_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor8_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor8">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor8_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor9_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor9">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor9_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor10_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor10">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor10_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor11_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor11">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor11_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Motor12_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Motor12">
+      <hardwareInterface>position</hardwareInterface>
+    </joint>
+    <actuator name="Motor12_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <ros2_control name="urd_robot_hw" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      <param name="update_rate">50</param>
+    </hardware>
+
+    <!-- Define joints Motor1..Motor12 with position command + state interfaces -->
+    <joint name="Motor1">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor2">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor3">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor4">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor5">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor6">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor7">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor8">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor9">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor10">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor11">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+    <joint name="Motor12">
+      <command_interfaces>
+        <interface>position</interface>
+      </command_interfaces>
+      <state_interfaces>
+        <interface>position</interface>
+        <interface>velocity</interface>
+      </state_interfaces>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so"/>
+  </gazebo>
+
+</robot>

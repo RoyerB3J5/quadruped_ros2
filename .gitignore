@@ -1,0 +1,67 @@
+# ROS2 workspace
+/build/
+/install/
+/log/
+/.colcon_install_layout
+
+# ament/colcon
+/.*_setup.sh
+
+# Python
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+pip-wheel-metadata/
+*.whl
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+
+# pytest / mypy caches
+.pytest_cache/
+.mypy_cache/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ROS specific
+/.ros/
+*.bag
+*.bag.active
+
+# Logs and temp
+*.log
+tmp/
+
+# Secrets
+.env
+.env.*
+secrets.yaml
+credentials.json
+*.pem
+*.key
+
+# Large files / datasets (use Git LFS or external storage)
+/data/
+/models/
+
+# Optional: ignore install share ament index packages (if present)
+# /install/share/ament_index/resource_index/packages/

@@ -1,0 +1,1104 @@
+<robot
+  name="urd_robot_cuadrupedo_v5">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="model://urd_robot_cuadrupedo_v5/meshes/base_robot.STL"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry>
+        <mesh filename="model://urd_robot_cuadrupedo_v5/meshes/base_robot.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="inertial_link">
+    <inertial>
+      <origin
+        xyz="0.0 0.0 0.035"
+        rpy="0 0 0" />
+      <mass
+        value="5.0" />
+      <inertia
+        ixx="0.005"
+        ixy="9.7755E-08"
+        ixz="6.3465E-08"
+        iyy="0.005"
+        iyz="-4.2277E-09"
+        izz="0.010" />
+    </inertial>
+  </link>
+  
+  <joint name="inertial_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="inertial_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link
+    name="eslabon_coxa_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="0.035369 -0.0090269 0.001623"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7467E-05"
+        ixy="2.4535E-06"
+        ixz="-3.2608E-07"
+        iyy="1.4748E-05"
+        iyz="4.9519E-07"
+        izz="2.7861E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_coxa_derecha_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor1"
+    type="revolute">
+    <origin
+      xyz="0.0556 -0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="eslabon_coxa_derecha_delantera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_femur_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="-0.0024207 -0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="-1.9564E-07"
+        ixz="-3.536E-06"
+        iyy="4.8323E-05"
+        iyz="-2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_femur_derecha_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor5"
+    type="revolute">
+    <origin
+      xyz="0.0467 -0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_derecha_delantera" />
+    <child
+      link="eslabon_femur_derecha_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.0472" upper="1.885" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_tibia_derecha_delantera">
+    <inertial>
+      <origin
+        xyz="-0.00052387 -0.014256 -0.033591"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0939E-05"
+        ixy="3.5897E-09"
+        ixz="8.1426E-07"
+        iyy="1.094E-05"
+        iyz="1.3416E-08"
+        izz="7.9923E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_tibia_derecha_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <joint
+    name="Motor9"
+    type="revolute">
+    <origin
+      xyz="0 -0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_derecha_delantera" />
+    <child
+      link="eslabon_tibia_derecha_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10.0" velocity="1.0"/>
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_coxa_derecha_trasera">
+    <inertial>
+      <origin
+        xyz="-0.032487 -0.0090269 0.0016241"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7467E-05"
+        ixy="2.4094E-06"
+        ixz="-3.4746E-07"
+        iyy="1.4778E-05"
+        iyz="5.0366E-07"
+        izz="2.7891E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_coxa_derecha_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor2"
+    type="revolute">
+    <origin
+      xyz="-0.0556 -0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="eslabon_coxa_derecha_trasera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_femur_derecha_trasera">
+    <inertial>
+      <origin
+        xyz="-0.0024207 -0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="-1.9564E-07"
+        ixz="-3.536E-06"
+        iyy="4.8323E-05"
+        iyz="-2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_femur_derecha_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor6"
+    type="revolute">
+    <origin
+      xyz="-0.0267 -0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_derecha_trasera" />
+    <child
+      link="eslabon_femur_derecha_trasera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.0472" upper="1.885" effort="10.0" velocity="1.0"/>
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_tibia_derecha_trasera">
+    <inertial>
+      <origin
+        xyz="-0.00052387 -0.014256 -0.033591"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0939E-05"
+        ixy="3.5897E-09"
+        ixz="8.1426E-07"
+        iyy="1.094E-05"
+        iyz="1.3416E-08"
+        izz="7.9923E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_tibia_derecha_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <joint
+    name="Motor10"
+    type="revolute">
+    <origin
+      xyz="0 -0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_derecha_trasera" />
+    <child
+      link="eslabon_tibia_derecha_trasera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_coxa_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="0.035374 0.0090266 0.001627"
+        rpy="0 0 0" />
+      <mass
+        value="0.075981" />
+      <inertia
+        ixx="1.746E-05"
+        ixy="-2.4484E-06"
+        ixz="-3.1785E-07"
+        iyy="1.4729E-05"
+        iyz="-5.0055E-07"
+        izz="2.7844E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_coxa_izquierda_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor3"
+    type="revolute">
+    <origin
+      xyz="0.0556 0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="eslabon_coxa_izquierda_delantera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.0"/>
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_femur_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="-0.0024214 0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="1.9572E-07"
+        ixz="-3.5447E-06"
+        iyy="4.8323E-05"
+        iyz="2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_femur_izquierda_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor7"
+    type="revolute">
+    <origin
+      xyz="0.0467 0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_izquierda_delantera" />
+    <child
+      link="eslabon_femur_izquierda_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.0472" upper="1.885" effort="10.0" velocity="1.0"/>
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_tibia_izquierda_delantera">
+    <inertial>
+      <origin
+        xyz="-0.00052045 0.014256 -0.033592"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0943E-05"
+        ixy="-3.601E-09"
+        ixz="8.2159E-07"
+        iyy="1.094E-05"
+        iyz="-1.3419E-08"
+        izz="7.95E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_tibia_izquierda_delantera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <joint
+    name="Motor11"
+    type="revolute">
+    <origin
+      xyz="0 0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_izquierda_delantera" />
+    <child
+      link="eslabon_tibia_izquierda_delantera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_coxa_izquierda_trasera">
+    <inertial>
+      <origin
+        xyz="-0.032487 0.0090269 0.0016228"
+        rpy="0 0 0" />
+      <mass
+        value="0.076" />
+      <inertia
+        ixx="1.7466E-05"
+        ixy="-2.4094E-06"
+        ixz="-3.4767E-07"
+        iyy="1.4778E-05"
+        iyz="-4.9508E-07"
+        izz="2.7891E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_coxa_izquierda_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor4"
+    type="revolute">
+    <origin
+      xyz="-0.0556 0.0678 0.017"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="eslabon_coxa_izquierda_trasera" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_femur_izquierda_trasera">
+    <inertial>
+      <origin
+        xyz="-0.0024214 0.037916 -0.062962"
+        rpy="0 0 0" />
+      <mass
+        value="0.1022" />
+      <inertia
+        ixx="5.4793E-05"
+        ixy="1.9572E-07"
+        ixz="-3.5447E-06"
+        iyy="4.8323E-05"
+        iyz="2.073E-06"
+        izz="1.3118E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_femur_izquierda_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <joint
+    name="Motor8"
+    type="revolute">
+    <origin
+      xyz="-0.0267 0.0165 0.0002"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_coxa_izquierda_trasera" />
+    <child
+      link="eslabon_femur_izquierda_trasera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.0472" upper="1.885" effort="10.0" velocity="1.0"/>
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+  <link
+    name="eslabon_tibia_izquierda_trasera">
+    <inertial>
+      <origin
+        xyz="-0.00052045 0.014256 -0.033592"
+        rpy="0 0 0" />
+      <mass
+        value="0.02333" />
+      <inertia
+        ixx="1.0943E-05"
+        ixy="-3.601E-09"
+        ixz="8.2159E-07"
+        iyy="1.094E-05"
+        iyz="-1.3419E-08"
+        izz="7.95E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="eslabon_tibia_izquierda_trasera">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>2147483647.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <joint
+    name="Motor12"
+    type="revolute">
+    <origin
+      xyz="0 0.0118 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="eslabon_femur_izquierda_trasera" />
+    <child
+      link="eslabon_tibia_izquierda_trasera" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.0019" upper="-0.4189" effort="10.0" velocity="1.0" />
+    <dynamics damping="0.01" friction="10000"/>
+  </joint>
+
+  <link name="foot_FR">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="8.3333e-07" ixy="0.0" ixz="0.0" iyy="8.3333e-07" iyz="0.0" izz="8.3333e-07"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+            <fdir1>1 0 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <gazebo reference="foot_FR">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 1 0</fdir1>
+    <kp value="2147483647.0" />
+    <kd value="100.0" />
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+    <restitution_coefficient>1</restitution_coefficient>
+    <threshold>0</threshold>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+
+  <joint name="foot_FR_joint" type="fixed">
+    <parent link="eslabon_tibia_derecha_delantera"/>
+    <child link="foot_FR"/>
+    <origin xyz="0 -0.012 -0.09" rpy="0 0 0"/>
+  </joint>
+
+  <link name="foot_FL">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="8.3333e-07" ixy="0.0" ixz="0.0" iyy="8.3333e-07" iyz="0.0" izz="8.3333e-07"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+            <fdir1>1 0 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <gazebo reference="foot_FL">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 1 0</fdir1>
+    <kp value="2147483647.0" />
+    <kd value="100.0" />
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+    <restitution_coefficient>1</restitution_coefficient>
+    <threshold>0</threshold>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <joint name="foot_FL_joint" type="fixed">
+    <parent link="eslabon_tibia_izquierda_delantera"/>
+    <child link="foot_FL"/>
+    <origin xyz="0 0.012 -0.09" rpy="0 0 0"/>
+  </joint>
+
+
+  <link name="foot_BR">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="8.3333e-07" ixy="0.0" ixz="0.0" iyy="8.3333e-07" iyz="0.0" izz="8.3333e-07"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+            <fdir1>1 0 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <gazebo reference="foot_BR">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 1 0</fdir1>
+    <kp value="2147483647.0" />
+    <kd value="100.0" />
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+    <restitution_coefficient>1</restitution_coefficient>
+    <threshold>0</threshold>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <joint name="foot_BR_joint" type="fixed">
+    <parent link="eslabon_tibia_derecha_trasera"/>
+    <child link="foot_BR"/>
+    <origin xyz="0 -0.012 -0.09" rpy="0 0 0"/>
+  </joint>
+
+
+  <link name="foot_BL">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="8.3333e-07" ixy="0.0" ixz="0.0" iyy="8.3333e-07" iyz="0.0" izz="8.3333e-07"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.012"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+            <fdir1>1 0 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <gazebo reference="foot_BL">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <fdir1>1 1 0</fdir1>
+    <kp value="2147483647.0" />
+    <kd value="100.0" />
+    <maxVel>0.01</maxVel>
+    <self_collide>1</self_collide>
+    <minDepth>0.001</minDepth>
+    <restitution_coefficient>1</restitution_coefficient>
+    <threshold>0</threshold>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <joint name="foot_BL_joint" type="fixed">
+    <parent link="eslabon_tibia_izquierda_trasera"/>
+    <child link="foot_BL"/>
+    <origin xyz="0 0.012 -0.09" rpy="0 0 0"/>
+  </joint>
+
+
+
+  <ros2_control name="GazeboSystem" type="System">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <joint name="Motor1">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor2">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor3">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor4">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor5">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">1.4033</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor6">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">1.4033</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor7">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">1.4033</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor8">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">1.4033</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor9">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-2.8067</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor10">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-2.8067</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor11">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-2.8067</param>
+      </state_interface>
+    </joint>
+    <joint name="Motor12">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-2.8067</param>
+      </state_interface>
+    </joint>
+  </ros2_control>
+
+    <gazebo reference="base_link">
+      <mu1>2.5</mu1>
+      <mu2>2.0</mu2>
+      <linearDamping>0.05</linearDamping>
+      <angularDamping>0.05</angularDamping>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <parameters>/home/royerbj/robot_ws/install/gazebo_simulation/share/gazebo_simulation/models/urd_robot_cuadrupedo_v5/config/joint_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+</robot>

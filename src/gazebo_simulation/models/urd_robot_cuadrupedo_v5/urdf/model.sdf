@@ -1,0 +1,700 @@
+<sdf version='1.12'>
+  <model name='urd_robot_cuadrupedo_v5'>
+    <link name='base_robot'>
+      <inertial>
+        <pose>0.00028091999999999999 -1.8375e-06 0.024004000000000001 0 0 0</pose>
+        <mass>0.62602000000000002</mass>
+        <inertia>
+          <ixx>0.0011232</ixx>
+          <ixy>9.7755000000000004e-08</ixy>
+          <ixz>6.3465000000000006e-08</ixz>
+          <iyy>0.0011039000000000001</iyy>
+          <iyz>-4.2277000000000002e-09</iyz>
+          <izz>0.0021064</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_robot_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/base_robot.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_robot_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/base_robot.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor1' type='revolute'>
+      <pose relative_to='base_robot'>0.055599999999999997 -0.067799999999999999 0.017000000000000001 0 0 0</pose>
+      <parent>base_robot</parent>
+      <child>eslabon_coxa_derecha_delantera</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_coxa_derecha_delantera'>
+      <pose relative_to='Motor1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.035368999999999998 -0.0090268999999999992 0.0016230000000000001 0 0 0</pose>
+        <mass>0.075999999999999998</mass>
+        <inertia>
+          <ixx>1.7467000000000001e-05</ixx>
+          <ixy>2.4534999999999999e-06</ixy>
+          <ixz>-3.2608000000000002e-07</ixz>
+          <iyy>1.4748e-05</iyy>
+          <iyz>4.9518999999999998e-07</iyz>
+          <izz>2.7861e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_coxa_derecha_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_coxa_derecha_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor5' type='revolute'>
+      <pose relative_to='eslabon_coxa_derecha_delantera'>0.046699999999999998 -0.016500000000000001 0.00020000000000000001 0 0 0</pose>
+      <parent>eslabon_coxa_derecha_delantera</parent>
+      <child>eslabon_femur_derecha_delantera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_femur_derecha_delantera'>
+      <pose relative_to='Motor5'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0024207 -0.037915999999999998 -0.062962000000000004 0 0 0</pose>
+        <mass>0.1022</mass>
+        <inertia>
+          <ixx>5.4793000000000002e-05</ixx>
+          <ixy>-1.9564e-07</ixy>
+          <ixz>-3.5360000000000001e-06</ixz>
+          <iyy>4.8322999999999998e-05</iyy>
+          <iyz>-2.0729999999999999e-06</iyz>
+          <izz>1.3118e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_femur_derecha_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_femur_derecha_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor9' type='revolute'>
+      <pose relative_to='eslabon_femur_derecha_delantera'>0 -0.0118 -0.089999999999999997 0 0 0</pose>
+      <parent>eslabon_femur_derecha_delantera</parent>
+      <child>eslabon_tibia_derecha_delantera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_tibia_derecha_delantera'>
+      <pose relative_to='Motor9'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00052386999999999996 -0.014256 -0.033591000000000003 0 0 0</pose>
+        <mass>0.02333</mass>
+        <inertia>
+          <ixx>1.0939e-05</ixx>
+          <ixy>3.5897000000000001e-09</ixy>
+          <ixz>8.1426000000000004e-07</ixz>
+          <iyy>1.094e-05</iyy>
+          <iyz>1.3416000000000001e-08</iyz>
+          <izz>7.9922999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_tibia_derecha_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_tibia_derecha_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor2' type='revolute'>
+      <pose relative_to='base_robot'>-0.055599999999999997 -0.067799999999999999 0.017000000000000001 0 0 0</pose>
+      <parent>base_robot</parent>
+      <child>eslabon_coxa_derecha_trazera</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_coxa_derecha_trazera'>
+      <pose relative_to='Motor2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.032487000000000002 -0.0090268999999999992 0.0016241000000000001 0 0 0</pose>
+        <mass>0.075999999999999998</mass>
+        <inertia>
+          <ixx>1.7467000000000001e-05</ixx>
+          <ixy>2.4094000000000002e-06</ixy>
+          <ixz>-3.4746000000000002e-07</ixz>
+          <iyy>1.4778e-05</iyy>
+          <iyz>5.0366e-07</iyz>
+          <izz>2.7891000000000001e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_coxa_derecha_trazera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_coxa_derecha_trazera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor6' type='revolute'>
+      <pose relative_to='eslabon_coxa_derecha_trazera'>-0.026700000000000002 -0.016500000000000001 0.00020000000000000001 0 0 0</pose>
+      <parent>eslabon_coxa_derecha_trazera</parent>
+      <child>eslabon_femur_derecha_trazera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_femur_derecha_trazera'>
+      <pose relative_to='Motor6'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0024207 -0.037915999999999998 -0.062962000000000004 0 0 0</pose>
+        <mass>0.1022</mass>
+        <inertia>
+          <ixx>5.4793000000000002e-05</ixx>
+          <ixy>-1.9564e-07</ixy>
+          <ixz>-3.5360000000000001e-06</ixz>
+          <iyy>4.8322999999999998e-05</iyy>
+          <iyz>-2.0729999999999999e-06</iyz>
+          <izz>1.3118e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_femur_derecha_trazera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_femur_derecha_trazera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor10' type='revolute'>
+      <pose relative_to='eslabon_femur_derecha_trazera'>0 -0.0118 -0.089999999999999997 0 0 0</pose>
+      <parent>eslabon_femur_derecha_trazera</parent>
+      <child>eslabon_tibia_derecha_trazera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_tibia_derecha_trazera'>
+      <pose relative_to='Motor10'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00052386999999999996 -0.014256 -0.033591000000000003 0 0 0</pose>
+        <mass>0.02333</mass>
+        <inertia>
+          <ixx>1.0939e-05</ixx>
+          <ixy>3.5897000000000001e-09</ixy>
+          <ixz>8.1426000000000004e-07</ixz>
+          <iyy>1.094e-05</iyy>
+          <iyz>1.3416000000000001e-08</iyz>
+          <izz>7.9922999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_tibia_derecha_trazera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_tibia_derecha_trazera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_derecha_trazera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor3' type='revolute'>
+      <pose relative_to='base_robot'>0.055599999999999997 0.067799999999999999 0.017000000000000001 0 0 0</pose>
+      <parent>base_robot</parent>
+      <child>eslabon_coxa_izquierda_delantera</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_coxa_izquierda_delantera'>
+      <pose relative_to='Motor3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.035374000000000003 0.0090265999999999992 0.001627 0 0 0</pose>
+        <mass>0.075981000000000007</mass>
+        <inertia>
+          <ixx>1.7459999999999999e-05</ixx>
+          <ixy>-2.4484000000000001e-06</ixy>
+          <ixz>-3.1785e-07</ixz>
+          <iyy>1.4729000000000001e-05</iyy>
+          <iyz>-5.0055000000000002e-07</iyz>
+          <izz>2.7844e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_coxa_izquierda_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_coxa_izquierda_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor7' type='revolute'>
+      <pose relative_to='eslabon_coxa_izquierda_delantera'>0.046699999999999998 0.016500000000000001 0.00020000000000000001 0 0 0</pose>
+      <parent>eslabon_coxa_izquierda_delantera</parent>
+      <child>eslabon_femur_izquierda_delantera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_femur_izquierda_delantera'>
+      <pose relative_to='Motor7'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0024214000000000002 0.037915999999999998 -0.062962000000000004 0 0 0</pose>
+        <mass>0.1022</mass>
+        <inertia>
+          <ixx>5.4793000000000002e-05</ixx>
+          <ixy>1.9572000000000001e-07</ixy>
+          <ixz>-3.5447000000000001e-06</ixz>
+          <iyy>4.8322999999999998e-05</iyy>
+          <iyz>2.0729999999999999e-06</iyz>
+          <izz>1.3118e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_femur_izquierda_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_femur_izquierda_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor11' type='revolute'>
+      <pose relative_to='eslabon_femur_izquierda_delantera'>0 0.0118 -0.089999999999999997 0 0 0</pose>
+      <parent>eslabon_femur_izquierda_delantera</parent>
+      <child>eslabon_tibia_izquierda_delantera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_tibia_izquierda_delantera'>
+      <pose relative_to='Motor11'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00052044999999999999 0.014256 -0.033591999999999997 0 0 0</pose>
+        <mass>0.02333</mass>
+        <inertia>
+          <ixx>1.0943e-05</ixx>
+          <ixy>-3.6009999999999999e-09</ixy>
+          <ixz>8.2159000000000004e-07</ixz>
+          <iyy>1.094e-05</iyy>
+          <iyz>-1.3418999999999999e-08</iyz>
+          <izz>7.9500000000000001e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_tibia_izquierda_delantera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_tibia_izquierda_delantera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_delantera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor4' type='revolute'>
+      <pose relative_to='base_robot'>-0.055599999999999997 0.067799999999999999 0.017000000000000001 0 0 0</pose>
+      <parent>base_robot</parent>
+      <child>eslabon_coxa_izquierda_trasera</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_coxa_izquierda_trasera'>
+      <pose relative_to='Motor4'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.032487000000000002 0.0090268999999999992 0.0016228 0 0 0</pose>
+        <mass>0.075999999999999998</mass>
+        <inertia>
+          <ixx>1.7465999999999998e-05</ixx>
+          <ixy>-2.4094000000000002e-06</ixy>
+          <ixz>-3.4766999999999999e-07</ixz>
+          <iyy>1.4778e-05</iyy>
+          <iyz>-4.9508000000000001e-07</iyz>
+          <izz>2.7891000000000001e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_coxa_izquierda_trasera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_coxa_izquierda_trasera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_coxa_izquierda_trasera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor8' type='revolute'>
+      <pose relative_to='eslabon_coxa_izquierda_trasera'>-0.026700000000000002 0.016500000000000001 0.00020000000000000001 0 0 0</pose>
+      <parent>eslabon_coxa_izquierda_trasera</parent>
+      <child>eslabon_femur_izquierda_trazera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_femur_izquierda_trazera'>
+      <pose relative_to='Motor8'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0024214000000000002 0.037915999999999998 -0.062962000000000004 0 0 0</pose>
+        <mass>0.1022</mass>
+        <inertia>
+          <ixx>5.4793000000000002e-05</ixx>
+          <ixy>1.9572000000000001e-07</ixy>
+          <ixz>-3.5447000000000001e-06</ixz>
+          <iyy>4.8322999999999998e-05</iyy>
+          <iyz>2.0729999999999999e-06</iyz>
+          <izz>1.3118e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_femur_izquierda_trazera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trazera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_femur_izquierda_trazera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_femur_izquierda_trazera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Motor12' type='revolute'>
+      <pose relative_to='eslabon_femur_izquierda_trazera'>0 0.0118 -0.089999999999999997 0 0 0</pose>
+      <parent>eslabon_femur_izquierda_trazera</parent>
+      <child>eslabon_tibia_izquierda_trasera</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='eslabon_tibia_izquierda_trasera'>
+      <pose relative_to='Motor12'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00052044999999999999 0.014256 -0.033591999999999997 0 0 0</pose>
+        <mass>0.02333</mass>
+        <inertia>
+          <ixx>1.0943e-05</ixx>
+          <ixy>-3.6009999999999999e-09</ixy>
+          <ixz>8.2159000000000004e-07</ixz>
+          <iyy>1.094e-05</iyy>
+          <iyz>-1.3418999999999999e-08</iyz>
+          <izz>7.9500000000000001e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='eslabon_tibia_izquierda_trasera_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='eslabon_tibia_izquierda_trasera_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://urd_robot_cuadrupedo_v5/meshes/eslabon_tibia_izquierda_trasera.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.941174984 0.941174984 0.941174984 1</diffuse>
+          <ambient>0.941174984 0.941174984 0.941174984 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
