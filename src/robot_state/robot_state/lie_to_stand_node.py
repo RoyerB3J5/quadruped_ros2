@@ -3,6 +3,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Point
 from std_msgs.msg import String
 import numpy as np
+from robot_msgs.msg import MotionCommand
 
 class LieToStandNode(Node):
     def __init__(self):
@@ -22,9 +23,18 @@ class LieToStandNode(Node):
             10
         )
 
+        self.cmd_sub = self.create_subscription(
+            MotionCommand,
+            '/motion_command',
+            self.command_callback,
+            10
+        )
+
+        self.target_z = 0.10
+
         self.dt = 0.05
         self.duration = 3.0
-        self.total_steps = int(self.duration / self.dt)
+        self.total_steps = max(2, int(self.duration / self.dt))
 
         self.step = 0
         self.active = False
@@ -40,10 +50,15 @@ class LieToStandNode(Node):
 
         self.get_logger().info('LieToStandNode listo')
 
+    def command_callback(self, msg):
+        self.target_z = msg.z_height
+
     def state_callback(self, msg):
         if msg.data == 'TRANSITION_LIE_TO_STAND' and not self.active:
             self.active = True
             self.step = 0
+            self.z_stand = -self.target_z
+            self.z_lie = -0.03
             self.get_logger().info('Iniciando transición LIE → STAND')
 
     def update(self):
@@ -55,7 +70,6 @@ class LieToStandNode(Node):
 
         # interpolación suave (0 → 1)
         alpha = 0.5 * (1 - np.cos(np.pi * s))
-
 
         z = self.z_lie + alpha * (self.z_stand - self.z_lie)
         self.publish_feet(z)

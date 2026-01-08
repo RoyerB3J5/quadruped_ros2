@@ -33,10 +33,9 @@ class GaitGeneratorNode(Node):
         self.pending_stand = False
         self.robot_state = "LIE"
 
-
         self.step_length = 0.035
         self.step_height = 0.01
-        self.velocity = 0.0
+        self.velocity = 0.09
 
         self.T = 0.6
         self.T_min = 0.3

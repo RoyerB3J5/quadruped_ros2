@@ -11,6 +11,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
+    package_data={'robot_gui': ['images/*']},
+    include_package_data=True,
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='royerbj',

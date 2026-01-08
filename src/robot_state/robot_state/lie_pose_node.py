@@ -22,22 +22,31 @@ class LiePoseNode(Node):
 
         self.timer = self.create_timer(0.1, self.publish_pose)
         self.active = False
+        self.last_z = None
+        self.z_lie = -0.03
 
         self.get_logger().info('LiePoseNode listo')
 
     def state_callback(self, msg):
-        self.active = (msg.data == 'LIE')
+        is_lie = (msg.data == 'LIE')
+        if is_lie and not self.active:
+            self.last_z = None 
+        self.active = is_lie
 
     def publish_pose(self):
         if not self.active:
             return
 
-        z = -0.03 
+        z = self.z_lie
+
+        if self.last_z == z:
+            return
         
         self.pub_fl.publish(Point(x=0.0, y= 0.04005, z=z))
         self.pub_fr.publish(Point(x=0.0, y=-0.04005, z=z))
         self.pub_rl.publish(Point(x=0.0, y= 0.04005, z=z))
         self.pub_rr.publish(Point(x=0.0, y=-0.04005, z=z))
+        self.last_z = z
 
 
 def main():

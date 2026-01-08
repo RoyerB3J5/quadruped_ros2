@@ -46,8 +46,7 @@ class StateManagerNode(Node):
         self.publish_state()
         self.get_logger().info('State Manager iniciado')
 
-    # ---------------------------------------------
-
+ 
     def set_state(self, new_state: RobotState):
         if new_state == self.state:
             return
@@ -55,12 +54,10 @@ class StateManagerNode(Node):
         self.publish_state()
         self.get_logger().info(f'Estado -> {self.state.name}')
 
-    # ---------------------------------------------
 
     def command_callback(self, msg):
         command = msg.command.lower()
 
-        # Bloquear comandos durante transición
         if self.state in (
             RobotState.TRANSITION_LIE_TO_STAND,
             RobotState.TRANSITION_STAND_TO_LIE,
@@ -69,19 +66,20 @@ class StateManagerNode(Node):
             self.get_logger().warn('Robot en transición, comando ignorado')
             return
 
-        if command == "walk" and self.state == RobotState.STAND:
-            self.set_state(RobotState.WALK)
+        if command == "walk":
+            if self.state == RobotState.STAND:
+                self.set_state(RobotState.WALK)
 
-        elif command == "stand" and self.state == RobotState.WALK:
-            self.set_state(RobotState.TRANSITION_WALK_TO_STAND)
+        elif command == "stand":
+            if self.state == RobotState.WALK:
+                self.set_state(RobotState.TRANSITION_WALK_TO_STAND)
+            elif self.state == RobotState.LIE:
+                self.set_state(RobotState.TRANSITION_LIE_TO_STAND)
 
-        elif command == "stand" and self.state == RobotState.LIE:
-            self.set_state(RobotState.TRANSITION_LIE_TO_STAND)
+        elif command == "lie":
+            if self.state == RobotState.STAND:
+                self.set_state(RobotState.TRANSITION_STAND_TO_LIE)
 
-        elif command == "lie" and self.state == RobotState.STAND:
-            self.set_state(RobotState.TRANSITION_STAND_TO_LIE)
-
-    # ---------------------------------------------
 
     def done_callback(self, msg):
 
@@ -93,8 +91,6 @@ class StateManagerNode(Node):
 
         elif msg.data == 'WALK_TO_STAND_DONE' and self.state == RobotState.TRANSITION_WALK_TO_STAND:
             self.set_state(RobotState.STAND)
-
-    # ---------------------------------------------
 
     def publish_state(self):
         msg = String()
