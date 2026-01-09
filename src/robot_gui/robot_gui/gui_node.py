@@ -12,24 +12,33 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QGridLayout
 from pathlib import Path
 from robot_msgs.msg import MotionCommand
+from std_msgs.msg import String
 
 
 class TeachPendantNode(Node):
     def __init__(self):
         super().__init__('teach_pendant_gui')
         self.pub = self.create_publisher(MotionCommand, '/motion_command', 10)
+        self.state_sub = self.create_subscription(
+            String, '/robot_state', self.state_callback, 10
+        )
 
-        self.command = "lie"
+        self.desired_command = None
+        self.command = None
         self.gait = "trot"
         self.motion = "stop"
         self.velocity = 0.09
-        self.step_height = 0.01
+        self.step_height = 0.02
         self.step_length = 0.035
         self.z_height = 0.1
+        self._initial_published = False
+
+    def state_callback(self, msg):
+        self.command = msg.data.lower()
 
     def publish(self):
         msg = MotionCommand()
-        msg.command = self.command
+        msg.command = self.desired_command
         msg.gait = self.gait
         msg.motion = self.motion
         msg.velocity = self.velocity
@@ -37,6 +46,13 @@ class TeachPendantNode(Node):
         msg.step_length = self.step_length
         msg.z_height = self.z_height
         self.pub.publish(msg)
+
+    def publish_initial(self):
+        if self._initial_published:
+            return
+        self.publish()
+        self.get_logger().info('Initial MotionCommand published from GUI')
+        self._initial_published = True
 
 
 class TeachPendantGUI(QWidget):
@@ -150,13 +166,17 @@ class TeachPendantGUI(QWidget):
 
         left.addLayout(grid)
 
-        # map motion names to the button objects (after buttons created)
         self.motion_buttons = {
             "forward": btn_up,
             "backward": btn_down,
             "left": btn_left,
             "right": btn_right,
             "stop": btn_stop,
+        }
+
+        self.allowed_motion_by_gait = {
+            "trot": {"forward", "backward", "stop"},
+            "crawl": {"forward", "backward", "left", "right", "stop"},
         }
         
         left.addStretch(1)
@@ -191,20 +211,28 @@ class TeachPendantGUI(QWidget):
         )
         right.addLayout(layout)
 
+        # Set combo index to match node.gait without emitting the signal
+        self.gait_combo.blockSignals(True)
+        if self.node.gait == 'crawl':
+            self.gait_combo.setCurrentIndex(0)
+        else:
+            self.gait_combo.setCurrentIndex(1)
+        self.gait_combo.blockSignals(False)
+
         layout, self.z_height_slider = self.make_slider_box(
-            "ALTURA ROBOT", 3, 17, int(self.node.z_height * 100),
+            "ALTURA ROBOT", 4, 17, int(self.node.z_height * 100),
             self.set_z_height, "cm", display_divisor=1
         )
         right.addLayout(layout)
 
         layout, self.velocity_slider = self.make_slider_box(
-            "VELOCIDAD", 3, 20, int(self.node.velocity * 100),
+            "VELOCIDAD", 4, 20, int(self.node.velocity * 100),
             self.set_velocity, "m/s", display_divisor=100
         )
         right.addLayout(layout)
 
         layout, self.step_height_slider = self.make_slider_box(
-            "ALTURA DEL PASO", 5, 30, int(self.node.step_height * 1000),
+            "ALTURA DEL PASO", 5, 40, int(self.node.step_height * 1000),
             self.set_step_height, "cm", display_divisor=10
         )
         right.addLayout(layout)
@@ -222,7 +250,30 @@ class TeachPendantGUI(QWidget):
         self.adjustSize()
         self.setMinimumHeight(self.sizeHint().height())
 
-        QTimer.singleShot(200, self.node.publish)
+
+        self.state_timer = QTimer()
+        self.state_timer.timeout.connect(self.sync_state_label)
+        self.state_timer.start(100)
+
+    def sync_state_label(self):
+        state_map = {
+            "LIE": "ACOSTADO",
+            "STAND": "PARADO",
+            "WALK": "CAMINANDO",
+            "TRANSITION_WALK_TO_STAND": "TRANSICIÓN A PARADO",
+            "TRANSITION_STAND_TO_WALK": "TRANSICIÓN A CAMINANDO",
+            "TRANSITION_LIE_TO_STAND": "TRANSICIÓN A PARADO",
+            "TRANSITION_STAND_TO_LIE": "TRANSICIÓN A ACOSTADO",
+        }
+
+        cmd = self.node.command
+        if cmd is None and self.node.desired_command is not None:
+            cmd = self.node.desired_command
+
+        text = "INICIADO" if cmd is None else state_map.get(cmd.upper(), cmd.upper())
+        self.state_label.setText(f"Estado: {text}")
+        self.update_interblocks()
+
 
     def make_button(self, text, color):
         btn = QPushButton(text)
@@ -280,6 +331,39 @@ class TeachPendantGUI(QWidget):
             }}
         """
 
+    def update_motion_buttons_by_gait(self):
+        cmd = self.node.desired_command
+        real_cmd = self.node.command
+        in_transition = (real_cmd is not None) and ("transition" in real_cmd)
+
+        enabled_base = (cmd == "walk") and not in_transition
+
+        allowed = self.allowed_motion_by_gait[self.node.gait]
+
+        for motion, btn in self.motion_buttons.items():
+            enabled = enabled_base and (motion in allowed)
+            btn.setEnabled(enabled)
+
+            if not enabled:
+                btn.setChecked(False)
+                btn.setStyleSheet(btn.property("disabled_style"))
+            else:
+                # If this motion matches the current node.motion, mark it active
+                if self.node.motion == motion:
+                    btn.setChecked(True)
+                    color = "#c0392b" if motion == "stop" else "#27ae60"
+                    btn.setStyleSheet(self.active_style(color))
+                else:
+                    btn.setChecked(False)
+                    btn.setStyleSheet(btn.property("base_style"))
+
+        # If the interface is enabling motion controls but the current motion
+        # is not allowed for the selected gait, ensure we stay in 'stop'.
+        if enabled_base and self.node.motion not in allowed:
+            # Use set_motion so styles and checked states update consistently
+            self.set_motion("stop")
+
+
     def make_combo_box(self, title, items, callback):
         box = QVBoxLayout()
         title_lbl = QLabel(title)
@@ -334,57 +418,62 @@ class TeachPendantGUI(QWidget):
 
     def update_interblocks(self):
         cmd = self.node.command
-        motion_enabled = (cmd == "walk")
+        if cmd is None and self.node.desired_command is not None:
+            cmd = self.node.desired_command
 
-        for btn in self.motion_buttons.values():
-            btn.setEnabled(motion_enabled)
-
-            if motion_enabled:
-                btn.setStyleSheet(btn.property("base_style"))
-            else:
-                btn.setStyleSheet(btn.property("disabled_style"))
-                btn.setChecked(False)
-        
         self.z_height_slider.setEnabled(cmd in ["stand", "lie"])
-
         self.velocity_slider.setEnabled(cmd in ["walk", "stand"])
-
         self.step_height_slider.setEnabled(cmd in ["walk", "stand"])
-
         self.gait_combo.setEnabled(cmd in ["walk", "stand"])
+        
+        self.update_motion_buttons_by_gait()
+
 
     def set_motion(self, motion):
-        if self.node.command != "walk":
-            self.node.motion = "stop"
-        for btn in self.motion_buttons.values():
-            btn.setChecked(False)
-            btn.setStyleSheet(btn.property("base_style"))
+        if self.node.command not in [None, "walk"] and motion != "stop":
+            motion = "stop"
 
-        if motion in self.motion_buttons:
-            btn = self.motion_buttons[motion]
-            btn.setChecked(True)
+        if self.node.motion == motion:
+            return
 
-            if motion == "stop":
-                btn.setStyleSheet(self.active_style("#c0392b"))
-                QTimer.singleShot(3000, lambda b=btn: b.setStyleSheet(b.property("base_style")))
-            else:
-                btn.setStyleSheet(self.active_style("#27ae60"))
+        if self.node.motion in self.motion_buttons:
+            prev = self.motion_buttons[self.node.motion]
+            prev.setChecked(False)
+            prev.setStyleSheet(prev.property("base_style"))
+
+        btn = self.motion_buttons[motion]
+        btn.setChecked(True)
+
+        if motion == "stop":
+            btn.setStyleSheet(self.active_style("#c0392b"))
+            QTimer.singleShot(
+                3000,
+                lambda b=btn: (
+                    b.setStyleSheet(b.property("base_style"))
+                    if self.node.motion == "stop" else None
+                )
+            )
+        else:
+            btn.setStyleSheet(self.active_style("#27ae60"))
 
         self.node.motion = motion
         self.node.publish()
 
-    def set_command(self, cmd):
-        self.node.command = cmd
-        self.state_label.setText(f"Estado: {cmd.upper()}")
 
-        if cmd != "walk":
+
+    def set_command(self, cmd):
+        self.node.desired_command = cmd
+
+        if cmd in ["lie", "stand"]:
             self.node.motion = "stop"
 
-        self.update_interblocks()
         self.node.publish()
+        self.update_interblocks()
+
 
     def set_gait(self, gait):
         self.node.gait = gait
+        self.update_motion_buttons_by_gait()
         self.node.publish()
 
     def set_z_height(self, v):
@@ -416,12 +505,18 @@ def main():
     gui = TeachPendantGUI(node)
     gui.show()
 
-    timer = QTimer()
-    timer.start(50)
+    def spin_ros():
+        rclpy.spin_once(node, timeout_sec=0.0)
+
+    ros_timer = QTimer()
+    ros_timer.timeout.connect(spin_ros)
+    ros_timer.start(20)
 
     app.exec_()
+
     node.destroy_node()
     rclpy.shutdown()
+
 
 
 if __name__ == '__main__':

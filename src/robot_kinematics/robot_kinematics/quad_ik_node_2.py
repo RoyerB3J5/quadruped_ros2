@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Point
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import String  # Usamos String para enviar JSON
 from robot_kinematics.inverse_kinematics import inverse_kinematics_leg
+import json
 
 class QuadIKNode(Node):
 
@@ -14,26 +15,16 @@ class QuadIKNode(Node):
         self.L2 = 0.09
         self.L3 = 0.09
 
-        # Orden de joints según URDF / controller
-        self.joint_names = [
-            'Motor1', 'Motor5', 'Motor9',
-            'Motor2', 'Motor6', 'Motor10',
-            'Motor3', 'Motor7', 'Motor11',
-            'Motor4', 'Motor8', 'Motor12',
-        ]
-
-        self.joint_positions = [0.0] * 12
-
+        # Definición de patas
         self.legs = {
-            'front_left' : {'side':'left',  'idx' : [6,7,8]},
-            'front_right': {'side':'right', 'idx' : [0,1,2]},
-            'rear_left'  : {'side':'left',  'idx' : [9,10,11]},
-            'rear_right' : {'side':'right', 'idx' : [3,4,5]},
+            'front_left' : {'side':'left'},
+            'front_right': {'side':'right'},
+            'rear_left'  : {'side':'left'},
+            'rear_right' : {'side':'right'},
         }
-
+        
         self.foot_refs = {leg: None for leg in self.legs.keys()}
 
-        # Suscripciones a referencias de pies
         for leg in self.legs.keys():
             self.create_subscription(
                 Point, f'/foot_ref/{leg}',
@@ -41,43 +32,40 @@ class QuadIKNode(Node):
                 10
             )
 
-        # Publicador ForwardCommandController
-        self.pub = self.create_publisher(Float64MultiArray, '/leg_controller/commands', 10)
+        self.pub_angles = self.create_publisher(String, '/leg_angles', 10)
 
-        # Timer de actualización
         self.timer = self.create_timer(0.01, self.update_ik)
 
-        self.get_logger().info('Quad IK node (Forward) started')
+        self.get_logger().info('Quad IK node (Coppelia) started')
 
     def foot_callback(self, msg, leg):
         self.foot_refs[leg] = msg
 
     def update_ik(self):
-        # Verifica que todas las patas tengan referencia
         if any(msg is None for msg in self.foot_refs.values()):
             return
 
+        angles_dict = {}
         for leg, msg in self.foot_refs.items():
-            cfg = self.legs[leg]
             try:
                 q1, q2, q3 = inverse_kinematics_leg(
                     msg.x, msg.y, msg.z,
-                    self.L1, self.L2, self.L3, cfg['side']
+                    self.L1, self.L2, self.L3,
+                    self.legs[leg]['side']
                 )
             except ValueError:
-                continue
-            
-            i0, i1, i2 = cfg['idx']
-            self.joint_positions[i0] = q1
-            self.joint_positions[i1] = q2
-            self.joint_positions[i2] = q3
+                q1 = q2 = q3 = 0.0
+            angles_dict[leg] = [q1, q2, q3]
 
-        self.publish_forward_command()
+        angles_list = []
+        angles_list.extend(angles_dict['front_left'])
+        angles_list.extend(angles_dict['front_right'])
+        angles_list.extend(angles_dict['rear_left'])
+        angles_list.extend(angles_dict['rear_right'])
 
-    def publish_forward_command(self):
-        msg = Float64MultiArray()
-        msg.data = self.joint_positions  # en radianes
-        self.pub.publish(msg)
+        msg_str = String()
+        msg_str.data = json.dumps(angles_list)
+        self.pub_angles.publish(msg_str)
 
 def main():
     rclpy.init()

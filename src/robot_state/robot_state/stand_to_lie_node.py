@@ -43,7 +43,7 @@ class StandToLieNode(Node):
         self.y_right = -0.04005
 
         self.z_stand = -0.10
-        self.z_lie = -0.03
+        self.z_lie = -0.04
 
     def command_callback(self, msg):
         self.target_z = msg.z_height
@@ -54,7 +54,7 @@ class StandToLieNode(Node):
             self.step = 0
 
             self.z_stand = -self.target_z
-            self.z_lie = -0.03
+            self.z_lie = -0.04
             
             self.get_logger().info('Iniciando transición STAND → LIE')
 

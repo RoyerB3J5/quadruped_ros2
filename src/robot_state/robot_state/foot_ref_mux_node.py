@@ -10,7 +10,6 @@ class FootRefMuxNode(Node):
 
         self.state = 'LIE'
 
-        # ---- Sub estados
         self.create_subscription(String, '/robot_state', self.state_cb, 10)
 
         # ---- Subs de refs
@@ -31,7 +30,6 @@ class FootRefMuxNode(Node):
                     10
                 )
 
-        # ---- ÚNICOS publishers reales
         self.pub = {
             'front_left':  self.create_publisher(Point, '/foot_ref/front_left', 10),
             'front_right': self.create_publisher(Point, '/foot_ref/front_right', 10),
@@ -43,7 +41,6 @@ class FootRefMuxNode(Node):
 
         self.get_logger().info('FootRefMuxNode iniciado')
 
-    # ----------------------------------
 
     def state_cb(self, msg):
         self.state = msg.data
@@ -51,7 +48,6 @@ class FootRefMuxNode(Node):
     def ref_cb(self, msg, src, leg):
         self.refs[src][leg] = msg
 
-    # ----------------------------------
 
     def select_source(self):
         if self.state == 'LIE':

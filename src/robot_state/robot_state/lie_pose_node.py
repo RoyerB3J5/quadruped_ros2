@@ -23,7 +23,7 @@ class LiePoseNode(Node):
         self.timer = self.create_timer(0.1, self.publish_pose)
         self.active = False
         self.last_z = None
-        self.z_lie = -0.03
+        self.z_lie = -0.04
 
         self.get_logger().info('LiePoseNode listo')
 
